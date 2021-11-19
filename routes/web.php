@@ -22,6 +22,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('user', 'UserController');
     Route::get('user/status', 'UserController@ChangeStatus')->name('user.status');
+    Route::resource('user', 'UserController');
 });

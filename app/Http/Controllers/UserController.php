@@ -107,7 +107,7 @@ class UserController extends Controller
     public function ChangeStatus(Request $request){
         $user = User::find($request->id);
 
-        if($user->status = 'Approved'){
+        if($user->status == 'Approved'){
             $user->status = 'Unapproved';
             $text = 'Approve';
         }else{

@@ -52,7 +52,7 @@
                         <button type="submit" onclick="return confirm('Do you really want to Delete User? You cannot undone this.');" class="btn btn-outline-danger btn-sm mt-2"  name="submit" title="Delete User" data-toggle="tooltip">Delete</button>
                       </form>
 
-                      <a class="btn btn-outline-success btn-sm mt-2 userstatus" title="Edit User" data-toggle="tooltip" data-id="{{$t->id}}">
+                      <a class="btn btn-outline-success btn-sm mt-2 userstatus" title="Edit User" data-toggle="tooltip" data-id="{{$t->id}}" id="status{{$t->id}}">
                         @if($t->status == 'Approved')
                         Unapprove
                         @else
@@ -84,24 +84,16 @@ $(function(){
         e.preventDefault();
         var id = $(this).data('id');
         $.get('{{route("user.status")}}',{id:id},function(data){
-          $('.userstatus').html(data.text);
+          if(data.success = 'true'){
+            $('#status'+id).html(data.text);
+            alert('Process Successful.');
+          }else{            
+            alert('Process not successful.');
+          }
         });
     });
 
-    $('#user').DataTable({
-        "paging": true,
-              "lengthChange": true,
-              "searching": true,
-              "ordering": true,
-              "info": true,
-              "autoWidth": true,
-            language: {
-              paginate: {
-                next: '&#8594;', // or '→'
-                previous: '&#8592;' // or '←'
-              }
-            }
-      });
+   
 });
 </script>
 @endsection
